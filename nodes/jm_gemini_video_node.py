@@ -8,10 +8,9 @@ import time
 import logging
 import io
 import tempfile
-from google import genai
 from google.genai import types
 
-from .utils import tensor2pil, get_output_dir
+from .utils import tensor2pil, get_output_dir, create_ai_studio_client
 
 # 设置日志
 logger = logging.getLogger(__name__)
@@ -149,7 +148,7 @@ class JMGeminiVideoGenerator:
 
         try:
             # 创建客户端
-            client = genai.Client(api_key=gemini_api_key)
+            client = create_ai_studio_client(gemini_api_key)
 
             # 根据输入图像判断生成模式
             if first_image is None and last_image is None:

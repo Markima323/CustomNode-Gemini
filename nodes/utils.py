@@ -7,6 +7,22 @@ import os
 import numpy as np
 import torch
 from PIL import Image
+from google import genai
+
+
+def create_ai_studio_client(api_key):
+    """
+    Create a Gemini client that always uses Google AI Studio (Developer API).
+    This explicitly disables Vertex routing even if env vars are present.
+    """
+    cleaned_key = api_key.strip() if isinstance(api_key, str) else ""
+    if not cleaned_key:
+        raise ValueError("Gemini API key is required")
+
+    return genai.Client(
+        api_key=cleaned_key,
+        vertexai=False,
+    )
 
 
 def tensor2pil(image_tensor):

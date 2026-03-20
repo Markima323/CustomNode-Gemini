@@ -4,8 +4,8 @@ Take an input text, apply a prompt-driven transformation using Gemini, and retur
 """
 
 import logging
-from google import genai
 from google.genai import types
+from .utils import create_ai_studio_client
 
 logger = logging.getLogger(__name__)
 
@@ -71,7 +71,7 @@ class JMGeminiPromptTextProcessor:
             raise ValueError("Input text is required")
 
         try:
-            client = genai.Client(api_key=gemini_api_key)
+            client = create_ai_studio_client(gemini_api_key)
 
             contents = [
                 prompt_value,

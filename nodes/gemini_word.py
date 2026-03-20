@@ -4,10 +4,8 @@ Use Gemini 3 Flash Preview to read an image and return text guided by a prompt.
 """
 
 import logging
-from google import genai
 from google.genai import types
-
-from .utils import tensor2pil
+from .utils import create_ai_studio_client, tensor2pil
 
 logger = logging.getLogger(__name__)
 
@@ -66,7 +64,7 @@ class JMGeminiFlashPreviewVisionToText:
             raise ValueError("Prompt is required to guide the model output")
 
         try:
-            client = genai.Client(api_key=gemini_api_key)
+            client = create_ai_studio_client(gemini_api_key)
 
             pil_image = self._tensor_to_single_pil(image)
             contents = [prompt_value, pil_image]

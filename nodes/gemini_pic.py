@@ -9,10 +9,9 @@ import mimetypes
 import os
 import time
 from PIL import Image
-from google import genai
 from google.genai import types
 
-from .utils import tensor2pil, pil2tensor, get_output_dir
+from .utils import tensor2pil, pil2tensor, get_output_dir, create_ai_studio_client
 
 logger = logging.getLogger(__name__)
 
@@ -106,7 +105,7 @@ class JMGeminiFlashImageWithTexts:
             raise ValueError("At least one text input is required to guide the composition")
 
         try:
-            client = genai.Client(api_key=gemini_api_key)
+            client = create_ai_studio_client(gemini_api_key)
             base_image = self._tensor_to_single_pil(image)
 
             text_details = []

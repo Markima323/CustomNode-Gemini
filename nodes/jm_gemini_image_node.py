@@ -9,10 +9,9 @@ import mimetypes
 import io
 import logging
 from PIL import Image
-from google import genai
 from google.genai import types
 
-from .utils import tensor2pil, pil2tensor, get_output_dir
+from .utils import tensor2pil, pil2tensor, get_output_dir, create_ai_studio_client
 
 # 设置日志
 logger = logging.getLogger(__name__)
@@ -178,7 +177,7 @@ class JMGeminiImageGenerator:
         prompt_value = prompt.strip()
 
         # 创建客户端
-        client = genai.Client(api_key=api_key)
+        client = create_ai_studio_client(api_key)
 
         # 根据模型类型配置生成参数
         if model == GEMINI_2_5_FLASH_MODEL:
@@ -231,7 +230,7 @@ class JMGeminiImageGenerator:
             prompt_value = prompt.strip()
 
         # 创建客户端
-        client = genai.Client(api_key=api_key)
+        client = create_ai_studio_client(api_key)
 
         # 构建contents
         contents = []
